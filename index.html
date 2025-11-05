@@ -1,228 +1,424 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Daftar - Agency Sahabat Kita</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Member Elegan Ultimate</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
-      .form-container{
-        max-width:640px;
-        margin:40px auto;
-        padding:20px;
-        background:#fff;
-        box-shadow:0 0 10px rgba(0,0,0,0.06);
-      }
-      .payment-toggle .btn{ min-width:150px; }
-      /* Warna khusus untuk membedakan */
-      .btn-bank{ background:#007bff; color:#fff; border-color:#007bff; }
-      .btn-ewallet{ background:#28a745; color:#fff; border-color:#28a745; }
-      .btn-bank.active, .btn-ewallet.active{ opacity:0.95; }
-      .hidden{ display:none; }
-      .small-note{ font-size:0.85rem; color:#666; }
+/* == PENGATURAN DASAR & BACKGROUND IMAGE == */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; display: flex; justify-content: center;
+    align-items: center; min-height: 100vh; transition: background-color 0.3s;
+    
+    /* GANTI INI: URL Gambar Latar Belakang Anda */
+    background-image: url('URL_GAMBAR_BACKGROUND_ANDA'); 
+    background-size: cover; background-position: center;
+    background-repeat: no-repeat; background-attachment: fixed;
+    background-color: #eef1f5;
+}
+
+/* == KARTU FORMULIR ELEGAN == */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95); border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); padding: 35px;
+    width: 100%; max-width: 550px; box-sizing: border-box; transition: all 0.3s;
+}
+
+/* == HEADER ATAS & SIDEBAR CSS == */
+.main-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #e9ecef;
+}
+.header-logo { flex-grow: 1; text-align: center; }
+.header-logo img { height: 40px; max-width: 100%; }
+.menu-toggle, .theme-toggle { font-size: 1.5rem; color: #1a2a3a; cursor: pointer; padding: 5px; }
+.sidebar {
+    height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0;
+    background-color: #343a40; overflow-x: hidden; padding-top: 60px;
+    transition: 0.5s; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+}
+.sidebar a {
+    padding: 15px 25px; text-decoration: none; font-size: 1.1rem;
+    color: #f1f1f1; display: block; transition: 0.3s;
+}
+.sidebar a:hover { color: #00a896; background-color: #495057; }
+.sidebar .close-btn {
+    position: absolute; top: 10px; right: 25px; font-size: 30px;
+    color: #f1f1f1; padding: 0; line-height: 1;
+}
+.sidebar .close-btn:hover { color: #ff4d4d; background-color: transparent; }
+
+/* == JUDUL FORMULIR BARU == */
+.title-group { display: flex; align-items: center; gap: 12px; margin-bottom: 5px; }
+.title-group h3 { border-left: none; padding-left: 0; margin: 0; font-size: 1.5rem; font-weight: 700; color: #1a2a3a; }
+.title-icon { font-size: 1.8rem; color: #00a896; }
+.subtitle { margin-top: 5px; margin-bottom: 25px; color: #6c757d; font-size: 0.95rem; }
+hr { border: none; border-top: 1px solid #e9ecef; margin: 28px 0; }
+
+/* == UMUM FORMULIR == */
+h4 { color: #343a40; margin-bottom: 16px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #495057; font-size: 0.95rem; }
+.form-group input, .form-group select { 
+    width: 100%; padding: 14px; border: 1px solid #ced4da; border-radius: 8px; box-sizing: border-box; transition: all 0.3s; 
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #00a896; box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.2); }
+.payment-details { display: none; padding-top: 10px; }
+.payment-option-group { display: flex; gap: 15px; margin-bottom: 25px; }
+.payment-button {
+    flex-grow: 1; padding: 12px; border: 2px solid #ced4da; border-radius: 8px; text-align: center; cursor: pointer; font-weight: 600; color: #6c757d; transition: all 0.3s;
+}
+.payment-button.active {
+    background-color: #00a896; color: white; border-color: #00a896; box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+}
+.submit-button {
+    width: 100%; padding: 16px; background-color: #1a2a3a; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background-color 0.3s;
+}
+.submit-button:hover { background-color: #00a896; }
+
+
+/* == MODAL GAMBAR (POPUP) - UTAMA == */
+.modal {
+    display: none; position: fixed; z-index: 1001; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
+    align-items: center; justify-content: center; flex-direction: column;
+    padding: 20px; box-sizing: border-box; opacity: 0; transition: opacity 0.3s ease;
+}
+.modal.show {
+    display: flex; opacity: 1; 
+}
+.modal-content {
+    display: block; max-width: 90%; max-height: 90%; border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); transition: all 0.3s;
+}
+.close-modal-btn {
+    position: absolute; top: 20px; right: 40px; color: #f1f1f1;
+    font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer;
+}
+.close-modal-btn:hover { color: #ff4d4d; }
+
+
+/* == MODE GELAP (DARK MODE) CSS == */
+body.dark-mode { background-color: #000000; }
+.dark-mode .form-container { background-color: rgba(30, 30, 30, 0.95); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8); }
+.dark-mode h3, .dark-mode h4, .dark-mode .menu-toggle i, .dark-mode .theme-toggle i, .dark-mode .title-icon { color: #f1f1f1; }
+.dark-mode p, .dark-mode .form-group label, .dark-mode .subtitle { color: #a0a0a0; }
+.dark-mode .form-group input, .dark-mode .form-group select { background-color: #2c2c2c; border-color: #444; color: #e0e0e0; }
+.dark-mode .payment-button { border-color: #444; color: #a0a0a0; background-color: #2c2c2c; }
+.dark-mode .payment-button.active { background-color: #00a896; color: white; border-color: #00a896; }
+.dark-mode .submit-button { background-color: #00a896; }
     </style>
-  </head>
-  <body class="bg-light">
-    <div class="container">
-      <div class="form-container">
-        <h4 class="text-center mb-3">Form Pendaftaran Pembayaran</h4>
+</head>
+<body>
 
-        <form id="submit-to-google-sheet">
-          <div class="form-group">
-            <label for="nama_faya">NAMA FAYA</label>
-            <input class="form-control" type="text" id="nama_faya" name="nama_faya" placeholder="NAMA FAYA" required />
-          </div>
-
-          <div class="form-group">
-            <label for="id_faya">ID FAYA</label>
-            <input class="form-control" type="text" id="id_faya" name="id_faya" placeholder="ID FAYA" required />
-          </div>
-
-          <div class="form-group">
-            <label for="nomor_hp_wa">NOMOR HP/WA</label>
-            <input class="form-control" type="tel" id="nomor_hp_wa" name="nomor_hp_wa" placeholder="08xxxxxxxxxx" required />
-          </div>
-
-          <div class="form-group">
-            <label>PILIH METODE (BANK atau E-WALLET)</label>
-            <div class="btn-group d-flex payment-toggle" role="group" aria-label="payment type">
-              <button id="btn-bank" class="btn btn-bank active" type="button" data-type="bank">BANK</button>
-              <button id="btn-ewallet" class="btn btn-ewallet ml-2" type="button" data-type="ewallet">E-WALLET</button>
+    <div class="form-container">
+        <header class="main-header">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i> 
             </div>
-            <div class="small-note mt-1">Klik tombol untuk memilih jenis; lalu pilih provider dan masukkan nomor/ID.</div>
-          </div>
-
-          <!-- Bank inputs -->
-          <div id="bank-section">
-            <div class="form-group">
-              <label for="id_bank_ewallet_bank">ID BANK (pilih)</label>
-              <select class="form-control" id="id_bank_ewallet_bank" >
-                <option value="" disabled selected hidden>Pilih bank...</option>
-                <!-- Daftar bank umum di Indonesia (lengkap) -->
-                <option value="Bank Central Asia (BCA)">Bank Central Asia (BCA)</option>
-                <option value="Bank Rakyat Indonesia (BRI)">Bank Rakyat Indonesia (BRI)</option>
-                <option value="Bank Negara Indonesia (BNI)">Bank Negara Indonesia (BNI)</option>
-                <option value="Bank Mandiri">Bank Mandiri</option>
-                <option value="CIMB Niaga">CIMB Niaga</option>
-                <option value="Permata Bank">Permata Bank</option>
-                <option value="Bank Danamon">Bank Danamon</option>
-                <option value="Bank Bukopin">Bank Bukopin</option>
-                <option value="Bank Panin">Bank Panin</option>
-                <option value="Bank OCBC NISP">Bank OCBC NISP</option>
-                <option value="Bank Maybank Indonesia">Bank Maybank Indonesia</option>
-                <option value="Bank BTN">Bank BTN</option>
-                <option value="Bank Mega">Bank Mega</option>
-                <option value="Bank BTPN">Bank BTPN</option>
-                <option value="Bank Bukalapak (Bank KB Bukopin)">Bank Bukalapak</option>
-                <option value="Bank BSI (Bank Syariah Indonesia)">Bank BSI</option>
-                <option value="Bank Syariah Mandiri">Bank Syariah Mandiri</option>
-                <option value="Bank Muamalat">Bank Muamalat</option>
-                <option value="Bank Jabar Banten (BJB)">Bank Jabar Banten (BJB)</option>
-                <option value="Bank BPD">Bank BPD</option>
-                <option value="HSBC Indonesia">HSBC Indonesia</option>
-                <option value="Standard Chartered">Standard Chartered</option>
-                <option value="Citibank">Citibank</option>
-                <option value="Bank Central Asia Syariah">BCA Syariah</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
+            
+            <div class="header-logo">
+                <img src="URL_GAMBAR_ANDA" alt="Logo Perusahaan"> 
             </div>
-            <div class="form-group">
-              <label for="nomor_bank_ewallet_bank">NOMOR REKENING (Bank)</label>
-              <input class="form-control" type="text" id="nomor_bank_ewallet_bank" placeholder="Nomor rekening" />
+
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun" id="themeIcon"></i> 
             </div>
-          </div>
-
-          <!-- Ewallet inputs -->
-          <div id="ewallet-section" class="hidden">
-            <div class="form-group">
-              <label for="id_bank_ewallet_ewallet">ID E-WALLET (pilih)</label>
-              <select class="form-control" id="id_bank_ewallet_ewallet" >
-                <option value="" disabled selected hidden>Pilih e-wallet...</option>
-                <!-- Daftar e-wallet populer di Indonesia -->
-                <option value="GoPay">GoPay</option>
-                <option value="OVO">OVO</option>
-                <option value="DANA">DANA</option>
-                <option value="ShopeePay">ShopeePay</option>
-                <option value="LinkAja">LinkAja</option>
-                <option value="BCA Mobile (Dompet) - jika menggunakan">BCA Mobile</option>
-                <option value="Jenius Pay">Jenius Pay</option>
-                <option value="Shopeepay Later">ShopeePay Later</option>
-                <option value="Bank-specific e-wallet (contoh) ">Bank-specific e-wallet</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
+        </header>
+        
+        <nav class="sidebar" id="sidebarMenu">
+            <a href="#" class="close-btn" id="closeSidebar"><i class="fas fa-times"></i></a>
+            <a href="#polis-gaji">Polis Gaji</a>
+            <a href="#data-gaji">Data Gaji</a>
+            <a href="gambar.png" id="targetKamuLink">TARGET KAMU</a> 
+        </nav>
+        
+        <div class="form-content">
+            <div class="title-group">
+                <i class="fas fa-file-alt title-icon"></i>
+                <h3>FORMULIR PENDAFTARAN MEMBER</h3>
             </div>
-            <div class="form-group">
-              <label for="nomor_bank_ewallet_ewallet">NOMOR / ID E-WALLET</label>
-              <input class="form-control" type="text" id="nomor_bank_ewallet_ewallet" placeholder="Nomor atau ID e-wallet" />
-            </div>
-          </div>
+            <p class="subtitle">Mohon lengkapi seluruh data di bawah ini untuk pendaftaran dan pengiriman ke Bot Telegram.</p>
+            <hr>
 
-          <div class="form-group">
-            <label for="nama_pemilik">NAMA PEMILIK</label>
-            <input class="form-control" type="text" id="nama_pemilik" name="nama_pemilik" placeholder="Nama pemilik rekening/akun" required />
-          </div>
+            <form id="dataForm"> 
+                
+                <h4>Informasi Akun</h4>
+                <div class="form-group"><label for="idFaya">ID Faya</label><input type="text" id="idFaya" name="id_faya" placeholder="Masukkan Id Faya Anda"></div>
+                <div class="form-group"><label for="namaFaya">Nama Faya</label><input type="text" id="namaFaya" name="nama_faya" placeholder="Masukkan Nama Lengkap Faya"></div>
+                <div class="form-group"><label for="nomorHp">Nomor HP / WA</label><input type="tel" id="nomorHp" name="nomor_hp" placeholder="Contoh: 08123456xxxx"></div>
+                <hr>
 
-          <!-- Hidden consolidated fields to send—these are the exact column names you requested -->
-          <input type="hidden" name="id_bank_ewallet" id="id_bank_ewallet" value="" />
-          <input type="hidden" name="nomor_bank_ewallet" id="nomor_bank_ewallet" value="" />
-          <input type="hidden" name="payment_type" id="payment_type" value="bank" />
+                <h4>Informasi Pembayaran</h4>
+                <div class="form-group"><label for="namaPemilik">Nama Pemilik Rekening / E-Wallet</label><input type="text" id="namaPemilik" name="nama_pemilik" placeholder="Nama sesuai rekening/e-wallet"></div>
 
-          <div class="form-group mt-3">
-            <button type="submit" class="btn btn-primary btn-block">Kirim</button>
-          </div>
-        </form>
-      </div>
+                <div class="form-group">
+                    <label>Pilih Jenis Pembayaran</label>
+                    <div class="payment-option-group">
+                        <div class="payment-button active" data-type="bank" id="btnBank"><input type="radio" id="pilihBank" name="jenis_pembayaran" value="bank" checked hidden>Bank</div>
+                        <div class="payment-button" data-type="ewallet" id="btnEwallet"><input type="radio" id="pilihEwallet" name="jenis_pembayaran" value="ewallet" hidden>E-Wallet</div>
+                    </div>
+                </div>
+
+                <div id="detailBank" class="payment-details">
+                    <div class="form-group">
+                        <label for="namaBank">Pilih Nama Bank</label>
+                        <select id="namaBank" name="nama_bank">
+                            <option value="">-- Pilih Bank --</option>
+                            <option value="bca">Bank Central Asia (BCA)</option>
+                            <option value="mandiri">Bank Mandiri</option>
+                            <option value="bni">Bank Negara Indonesia (BNI)</option>
+                            <option value="bri">Bank Rakyat Indonesia (BRI)</option>
+                            <option value="btn">Bank Tabungan Negara (BTN)</option>
+                            <option value="bni_syariah">BNI Syariah</option>
+                            <option value="bsm">Bank Syariah Mandiri (BSM)</option>
+                            <option value="cimb">CIMB Niaga</option>
+                            <option value="muamalat">Bank Muamalat</option>
+                            <option value="permata">Bank Permata</option>
+                            <option value="danamon">Bank Danamon</option>
+                            <option value="maybank">Maybank Indonesia</option>
+                            <option value="panin">Bank Panin</option>
+                            <option value="artha_graha">Bank Artha Graha</option>
+                            <option value="mega">Bank Mega</option>
+                            <option value="bukopin">Bank Bukopin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomorRekening">Nomor Rekening Bank</label>
+                        <input type="text" id="nomorRekening" name="nomor_rekening" placeholder="Masukkan nomor rekening">
+                    </div>
+                </div>
+
+                <div id="detailEwallet" class="payment-details">
+                    <div class="form-group">
+                        <label for="namaEwallet">Pilih Nama E-Wallet</label>
+                        <select id="namaEwallet" name="nama_ewallet">
+                            <option value="">-- Pilih E-Wallet --</option>
+                            <option value="gopay">GoPay</option>
+                            <option value="ovo">OVO</option>
+                            <option value="dana">DANA</option>
+                            <option value="shopeepay">ShopeePay</option>
+                            <option value="linkaja">LinkAja</option>
+                            <option value="isaku">i.saku (Indomaret)</option>
+                            <option value="sakuku">Sakuku (BCA)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomorEwallet">Nomor E-Wallet (Nomor HP)</label>
+                        <input type="text" id="nomorEwallet" name="nomor_ewallet" placeholder="Masukkan nomor HP yang terdaftar">
+                    </div>
+                </div>
+                
+                <hr>
+
+                <button type="button" id="kirimTelegram" class="submit-button">KIRIM DATA KE TELEGRAM BOT</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="imageModal" class="modal">
+        <span class="close-modal-btn" id="closeImageModal">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Gambar Target Kamu">
     </div>
 
     <script>
-      // Ganti dengan URL Web App Apps Script Anda setelah deploy
-      const scriptURL = "https://script.google.com/macros/s/AKfycbzxwvYgO9a3bpKjz8bNdIhno-gpp_sC5gqtmjJtQlecI8TEbo7LddQj-84xyuCHnZjyeg/exec";
+document.addEventListener('DOMContentLoaded', function() {
+            
+    // --- KONFIGURASI TELEGRAM (WAJIB GANTI!) ---
+    const BOT_TOKEN = 'GANTI_DENGAN_TOKEN_BOT_ANDA';
+    const CHAT_ID = 'GANTI_DENGAN_CHAT_ID_TUJUAN';
 
-      const btnBank = document.getElementById('btn-bank');
-      const btnEwallet = document.getElementById('btn-ewallet');
-      const bankSection = document.getElementById('bank-section');
-      const ewalletSection = document.getElementById('ewallet-section');
+    // --- ELEMEN UMUM ---
+    const form = document.getElementById('dataForm');
+    const sidebar = document.getElementById('sidebarMenu');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const menuToggle = document.getElementById('menuToggle');
+    const kirimButton = document.getElementById('kirimTelegram');
+    const body = document.body;
+    
+    // --- ELEMEN DINAMIS FORM ---
+    const btnBank = document.getElementById('btnBank');
+    const btnEwallet = document.getElementById('btnEwallet');
+    const radioBank = document.getElementById('pilihBank');
+    const radioEwallet = document.getElementById('pilihEwallet');
+    const detailBank = document.getElementById('detailBank');
+    const detailEwallet = document.getElementById('detailEwallet');
 
-      // bank inputs
-      const idBankBank = document.getElementById('id_bank_ewallet_bank');
-      const nomorBankBank = document.getElementById('nomor_bank_ewallet_bank');
-      // ewallet inputs
-      const idEwallet = document.getElementById('id_bank_ewallet_ewallet');
-      const nomorEwallet = document.getElementById('nomor_bank_ewallet_ewallet');
-
-      // hidden consolidated fields to send
-      const hiddenId = document.getElementById('id_bank_ewallet');
-      const hiddenNomor = document.getElementById('nomor_bank_ewallet');
-      const hiddenType = document.getElementById('payment_type');
-
-      // default = bank
-      function showBank(){
-        btnBank.classList.add('active');
-        btnEwallet.classList.remove('active');
-        bankSection.classList.remove('hidden');
-        ewalletSection.classList.add('hidden');
-        hiddenType.value = 'bank';
-        // set required attributes for UX (final check done before submit)
-        idBankBank.required = true;
-        nomorBankBank.required = true;
-        idEwallet.required = false;
-        nomorEwallet.required = false;
-      }
-      function showEwallet(){
-        btnEwallet.classList.add('active');
+    // --- ELEMEN MODAL & THEME ---
+    const targetKamuLink = document.getElementById('targetKamuLink');
+    const imageModal = document.getElementById('imageModal');
+    const closeModalBtn = document.getElementById('closeImageModal');
+    const modalImage = document.getElementById('modalImage');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    
+    // =======================================================
+    // FUNGSI 1: MENGATUR TOMBOL PEMBAYARAN & TAMPILAN DINAMIS
+    // =======================================================
+    function updatePaymentDetails(selectedType) {
         btnBank.classList.remove('active');
-        ewalletSection.classList.remove('hidden');
-        bankSection.classList.add('hidden');
-        hiddenType.value = 'ewallet';
-        idEwallet.required = true;
-        nomorEwallet.required = true;
-        idBankBank.required = false;
-        nomorBankBank.required = false;
-      }
+        btnEwallet.classList.remove('active');
+        detailBank.style.display = 'none';
+        detailEwallet.style.display = 'none';
 
-      btnBank.addEventListener('click', function(){ showBank(); });
-      btnEwallet.addEventListener('click', function(){ showEwallet(); });
-
-      showBank(); // inisialisasi
-
-      const form = document.getElementById('submit-to-google-sheet');
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-
-        // Isi hidden fields sesuai pilihan
-        if (!bankSection.classList.contains('hidden')) {
-          hiddenId.value = idBankBank.value || "";
-          hiddenNomor.value = nomorBankBank.value || "";
+        if (selectedType === 'bank') {
+            btnBank.classList.add('active');
+            radioBank.checked = true;
+            detailBank.style.display = 'block';
         } else {
-          hiddenId.value = idEwallet.value || "";
-          hiddenNomor.value = nomorEwallet.value || "";
+            btnEwallet.classList.add('active');
+            radioEwallet.checked = true;
+            detailEwallet.style.display = 'block';
+        }
+    }
+
+    btnBank.addEventListener('click', () => updatePaymentDetails('bank'));
+    btnEwallet.addEventListener('click', () => updatePaymentDetails('ewallet'));
+    updatePaymentDetails('bank'); // Inisialisasi awal
+
+
+    // =======================================================
+    // FUNGSI 2: KIRIM DATA KE TELEGRAM
+    // =======================================================
+    kirimButton.addEventListener('click', function() {
+        const data = new FormData(form);
+        const jenisPembayaran = data.get('jenis_pembayaran');
+        let message = "<b>🚨 DATA MEMBER BARU TELAH MASUK</b>\n\n";
+        
+        // Pengumpulan Pesan
+        message += "<b>--- INFORMASI AKUN ---</b>\n";
+        message += "ID Faya: " + data.get('id_faya') + "\n";
+        // ... (Logika pengumpulan data lainnya) ...
+        message += "Nama Faya: " + data.get('nama_faya') + "\n";
+        message += "Nomor HP/WA: " + data.get('nomor_hp') + "\n\n";
+        message += "<b>--- INFORMASI PEMBAYARAN ---</b>\n";
+        message += "Nama Pemilik: " + data.get('nama_pemilik') + "\n";
+        message += "Jenis Pembayaran: <b>" + jenisPembayaran.toUpperCase() + "</b>\n";
+
+        if (jenisPembayaran === 'bank') {
+            const namaBankText = document.getElementById('namaBank').options[document.getElementById('namaBank').selectedIndex].text;
+            message += "Nama Bank: " + namaBankText + "\n";
+            message += "Nomor Rekening: " + data.get('nomor_rekening') + "\n";
+        } else if (jenisPembayaran === 'ewallet') {
+            const namaEwalletText = document.getElementById('namaEwallet').options[document.getElementById('namaEwallet').selectedIndex].text;
+            message += "Nama E-Wallet: " + namaEwalletText + "\n";
+            message += "Nomor E-Wallet: " + data.get('nomor_ewallet') + "\n";
         }
 
-        // Ambil hanya field yang Anda minta
-        const payload = new FormData();
-        payload.append('nama_faya', document.getElementById('nama_faya').value || "");
-        payload.append('id_faya', document.getElementById('id_faya').value || "");
-        payload.append('nomor_hp_wa', document.getElementById('nomor_hp_wa').value || "");
-        payload.append('id_bank_ewallet', hiddenId.value || "");
-        payload.append('nama_pemilik', document.getElementById('nama_pemilik').value || "");
-        payload.append('nomor_bank_ewallet', hiddenNomor.value || "");
-        payload.append('payment_type', hiddenType.value || "");
+        // Fetch API ke Telegram
+        const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        fetch(telegramURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('✅ Data berhasil dikirim ke Telegram!');
+                form.reset();
+                updatePaymentDetails('bank');
+            } else {
+                alert('❌ Gagal mengirim data. Cek Token dan Chat ID.');
+            }
+        })
+        .catch(error => {
+            alert('❌ Terjadi kesalahan jaringan: ' + error.message);
+        });
+    });
 
-        fetch(scriptURL, { method: 'POST', body: payload })
-          .then(response => response.json ? response.json() : response.text())
-          .then(result => {
-            alert('Data berhasil dikirim.');
-            form.reset();
-            showBank();
-          })
-          .catch(err => {
-            alert('Terjadi kesalahan saat mengirim. Cek Web App URL dan izin.');
-            console.error(err);
-          });
-      });
+
+    // =======================================================
+    // FUNGSI 3: SIDEBAR MENU (Hamburger dan Tutup)
+    // =======================================================
+    menuToggle.addEventListener('click', function() {
+        sidebar.style.width = '250px';
+    });
+
+    closeSidebar.addEventListener('click', function(e) {
+        e.preventDefault();
+        sidebar.style.width = '0';
+    });
+    
+    // Tutup sidebar saat klik link internal (Polis Gaji/Data Gaji)
+    sidebar.querySelectorAll('a').forEach(link => {
+        if (link.id !== 'closeSidebar' && link.id !== 'targetKamuLink') {
+            link.addEventListener('click', () => {
+                sidebar.style.width = '0';
+            });
+        }
+    });
+
+
+    // =======================================================
+    // FUNGSI 4: MODAL GAMBAR (TARGET KAMU - Menggunakan File Lokal)
+    // =======================================================
+    targetKamuLink.addEventListener('click', function(e) {
+        e.preventDefault(); 
+        
+        sidebar.style.width = '0'; // Tutup sidebar
+        
+        // Memanggil gambar lokal (gambar.png)
+        modalImage.src = targetKamuLink.href; 
+        
+        // Tampilkan modal dengan transisi
+        setTimeout(() => {
+             imageModal.style.display = 'flex';
+             imageModal.classList.add('show');
+        }, 300); 
+    });
+
+    function hideImageModal() {
+         imageModal.classList.remove('show');
+         setTimeout(() => {
+            imageModal.style.display = 'none';
+         }, 300);
+    }
+    
+    // Tutup modal jika klik tombol X
+    closeModalBtn.addEventListener('click', hideImageModal);
+
+    // Tutup modal jika klik di luar gambar
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            hideImageModal();
+        }
+    });
+
+
+    // =======================================================
+    // FUNGSI 5: MODE GELAP/TERANG (TOGGLE)
+    // =======================================================
+    function toggleDarkMode() {
+        const isDarkMode = body.classList.toggle('dark-mode');
+        
+        if (isDarkMode) {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    themeToggle.addEventListener('click', toggleDarkMode);
+
+    // Cek preferensi tema saat halaman dimuat
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        body.classList.add('dark-mode');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+});
     </script>
-  </body>
+
+</body>
 </html>
