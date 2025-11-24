@@ -25,12 +25,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailBank = document.getElementById('detailBank');
     const detailEwallet = document.getElementById('detailEwallet');
 
-    // --- ELEMEN CASBON & NAVIGASI (BARU/DIREVISI) ---
+    // --- ELEMEN CASBON & NAVIGASI (DIREVISI) ---
     const casbonContent = document.getElementById('casbonContent');   // Konten Casbon
-    const casbonLink = document.getElementById('casbonLink');         // Link Casbon di sidebar
+    const casbonLink = document.getElementById('casbonLink');        // Link Casbon di sidebar
     const casbonForm = document.getElementById('casbonForm');
     const kirimCasbonButton = document.getElementById('kirimCasbonTelegram');
     
+    // --- BARU: ELEMEN KOIN CASBON (Tombol Pilihan) ---
+    const coinOptionGroup = document.getElementById('coinOptionGroup');
+    const jumlahCoinInput = document.getElementById('jumlahCoinInput');
+    const jumlahRupiahInput = document.getElementById('jumlahRupiahInput'); 
+    const selectedCoinDisplay = document.getElementById('selectedCoinDisplay'); 
+
     // --- ELEMEN NAVIGASI HOME BARU ---
     const homeLink = document.getElementById('homeLink'); // Link HOME / DATA GAJI
     
@@ -76,25 +82,31 @@ document.addEventListener('DOMContentLoaded', function() {
 // 2. FUNGSI DATA GAJI: MENGATUR TOMBOL PEMBAYARAN & TAMPILAN DINAMIS
 // -------------------------------------------------------------------
     function updatePaymentDetails(selectedType) {
-        btnBank.classList.remove('active');
-        btnEwallet.classList.remove('active');
-        detailBank.style.display = 'none';
-        detailEwallet.style.display = 'none';
+        // Hanya jalankan jika elemen ada (untuk menghindari error saat beralih ke Casbon)
+        if (btnBank && btnEwallet && detailBank && detailEwallet) {
+            btnBank.classList.remove('active');
+            btnEwallet.classList.remove('active');
+            detailBank.style.display = 'none';
+            detailEwallet.style.display = 'none';
 
-        if (selectedType === 'bank') {
-            btnBank.classList.add('active');
-            radioBank.checked = true;
-            detailBank.style.display = 'block';
-        } else {
-            btnEwallet.classList.add('active');
-            radioEwallet.checked = true;
-            detailEwallet.style.display = 'block';
+            if (selectedType === 'bank') {
+                btnBank.classList.add('active');
+                radioBank.checked = true;
+                detailBank.style.display = 'block';
+            } else {
+                btnEwallet.classList.add('active');
+                radioEwallet.checked = true;
+                detailEwallet.style.display = 'block';
+            }
         }
     }
 
-    btnBank.addEventListener('click', () => updatePaymentDetails('bank'));
-    btnEwallet.addEventListener('click', () => updatePaymentDetails('ewallet'));
-    updatePaymentDetails('bank'); // Inisialisasi awal
+    // Hanya tambahkan event listener jika elemen ada
+    if (btnBank && btnEwallet) {
+        btnBank.addEventListener('click', () => updatePaymentDetails('bank'));
+        btnEwallet.addEventListener('click', () => updatePaymentDetails('ewallet'));
+        updatePaymentDetails('bank'); // Inisialisasi awal
+    }
 
 
 // -------------------------------------------------------------------
@@ -183,14 +195,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 // Aktifkan kembali tombol
                 kirimButton.disabled = false;
-                kirimButton.textContent = 'KIRIM DATA KE TELEGRAM BOT';
+                kirimButton.textContent = 'KIRIM DATA KE OWNER FAYA';
             });
         });
     }
 
 
 // -------------------------------------------------------------------
-// 4. FUNGSI CASBON: KIRIM DATA KE TELEGRAM
+// 4. FUNGSI CASBON: KIRIM DATA KE TELEGRAM (SUDAH DIREVISI)
 // -------------------------------------------------------------------
     if (kirimCasbonButton) {
         kirimCasbonButton.addEventListener('click', function() {
@@ -198,21 +210,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = new FormData(casbonForm);
             const namaFaya = data.get('casbon_nama_faya');
             const idFaya = data.get('casbon_id_faya');
-            const jumlahCoin = data.get('jumlah_coin');
+            
+            // Ambil dari input tersembunyi baru
+            const jumlahCoin = data.get('jumlah_coin'); 
+            const jumlahRupiah = data.get('jumlah_rupiah'); 
             
             // --- Validasi Data Casbon ---
-            if (!namaFaya || !idFaya || !jumlahCoin) {
-                alert('❌ Harap lengkapi Nama Faya, ID Faya, dan pilih Jumlah Koin Casbon.');
+            if (!namaFaya || !idFaya || !jumlahCoin || !jumlahRupiah) {
+                alert('❌ Harap lengkapi Nama Faya, ID Faya, dan pilih Jumlah Koin Casbon (tombol pilihan).');
                 return;
             }
 
-            const jumlahCoinText = document.getElementById('jumlahCoin').options[document.getElementById('jumlahCoin').selectedIndex].text;
+            // Format angka untuk tampilan di Telegram
+            // .toLocaleString('id-ID') digunakan untuk menambahkan pemisah ribuan
+            const formattedCoin = Number(jumlahCoin).toLocaleString('id-ID');
+            const formattedRupiah = Number(jumlahRupiah).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
 
             let message = "<b>🚨 PENGAJUAN CASBON BARU TELAH MASUK</b>\n\n";
             message += "<b>--- DETAIL CASBON ---</b>\n";
             message += "Nama Faya: " + namaFaya + "\n";
             message += "ID Faya: " + idFaya + "\n";
-            message += "Jumlah Koin Diajukan: <b>" + jumlahCoinText + "</b>\n";
+            message += "Koin Diajukan: <b>" + formattedCoin + " Koin</b>\n";
+            message += "Nilai Rupiah: <b>" + formattedRupiah + "</b>\n";
             
             // Matikan tombol saat mengirim
             kirimCasbonButton.disabled = true;
@@ -231,8 +250,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('✅ Data Casbon Berhasil Di Kirim Ke Owner Faya CB');
+                    alert('✅ Pengajuan Casbon Berhasil Di Kirim!');
                     casbonForm.reset();
+                    // Reset tampilan tombol
+                    document.querySelectorAll('.coin-button.active').forEach(btn => btn.classList.remove('active'));
+                    selectedCoinDisplay.textContent = '**Tidak Ada**'; // Reset tampilan pilihan
                 } else {
                     response.json().then(data => {
                         console.error('Telegram API Error:', data);
@@ -251,9 +273,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+// -------------------------------------------------------------------
+// 5. FUNGSI CASBON: MENGATUR TOMBOL PILIHAN KOIN (BARU)
+// -------------------------------------------------------------------
+
+if (coinOptionGroup) {
+    const coinButtons = coinOptionGroup.querySelectorAll('.coin-button');
+
+    coinButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Hapus kelas 'active' dari semua tombol
+            coinButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Tambahkan kelas 'active' ke tombol yang diklik
+            this.classList.add('active');
+
+            const selectedCoin = this.getAttribute('data-coin');
+            const selectedRupiah = this.getAttribute('data-rupiah');
+            const displayText = this.textContent.trim(); // Ambil teks tombol
+
+            // Set nilai ke input tersembunyi
+            jumlahCoinInput.value = selectedCoin;
+            jumlahRupiahInput.value = selectedRupiah;
+            
+            // Tampilkan pilihan
+            selectedCoinDisplay.textContent = displayText;
+        });
+    });
+}
+
 
 // -------------------------------------------------------------------
-// 5. FUNGSI SIDEBAR MENU (Hamburger dan Tutup)
+// 6. FUNGSI SIDEBAR MENU (Hamburger dan Tutup)
 // -------------------------------------------------------------------
     menuToggle.addEventListener('click', function() {
         sidebar.style.width = '250px';
@@ -277,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // -------------------------------------------------------------------
-// 6. FUNGSI MODE GELAP/TERANG (TOGGLE) + FIX ICON
+// 7. FUNGSI MODE GELAP/TERANG (TOGGLE) + FIX ICON
 // -------------------------------------------------------------------
     function toggleDarkMode() {
         const isDarkMode = body.classList.toggle('dark-mode');

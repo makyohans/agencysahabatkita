@@ -78,7 +78,60 @@ h4 { color: #343a40; margin-bottom: 16px; }
 /* == CSS KHUSUS CASBON & PENYEMPURNAAN TAMPILAN BARU == */
 /* ==================================================== */
 
-/* Style untuk kotak informasi peringatan */
+/* --- BARU: STYLE UNTUK TOMBOL KOIN CASBON --- */
+
+.coin-option-group {
+    display: flex;
+    flex-wrap: wrap; /* Memungkinkan tombol pecah ke baris baru */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.coin-button {
+    padding: 10px 15px;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: #495057;
+    transition: all 0.2s;
+    flex-basis: calc(50% - 5px); /* Dua tombol per baris */
+    box-sizing: border-box;
+    /* Efek hover lembut */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Style saat tombol koin aktif/dipilih */
+.coin-button.active {
+    background-color: #00a896; 
+    color: white; 
+    border-color: #00a896; 
+    box-shadow: 0 3px 6px rgba(0, 168, 150, 0.3);
+    transform: translateY(-1px); /* Efek kecil saat dipilih */
+}
+
+.coin-button:hover:not(.active) {
+    background-color: #f0f0f0;
+    border-color: #adb5bd;
+}
+
+.selection-display {
+    margin-top: 20px;
+    font-size: 1em;
+    font-weight: 500;
+    color: #343a40;
+    text-align: center; /* Pilihan ditampilkan di tengah */
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+.selection-display span {
+    font-weight: 700;
+    color: #00a896;
+}
+
+/* --- KOTAK INFO --- */
 .info-box {
     background-color: #fff3cd; /* Warna kuning muda untuk peringatan */
     color: #856404; /* Warna teks gelap */
@@ -98,28 +151,9 @@ h4 { color: #343a40; margin-bottom: 16px; }
     margin-top: 2px; /* Penyesuaian kecil */
 }
 
-/* Mempercantik pilihan (select) koin */
-#jumlahCoin {
-    padding: 12px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    appearance: none; /* Hilangkan style default browser */
-    background-color: #f7f7f7;
-    /* Tambahkan ikon panah ke kanan */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%236c757d" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#jumlahCoin:focus {
-    border-color: #00a896;
-    box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.25);
-    outline: none;
-}
-
-
+/* ==================================================== */
 /* == MODAL GAMBAR (POPUP) - UTAMA == */
+/* ==================================================== */
 .modal {
     display: none; position: fixed; z-index: 1001; left: 0; top: 0;
     width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
@@ -141,7 +175,7 @@ h4 { color: #343a40; margin-bottom: 16px; }
 
 
 /* ==================================================== */
-/* == MODE GELAP (DARK MODE) CSS - Penyesuaian Tambahan == */
+/* == MODE GELAP (DARK MODE) CSS - Penyesuaian Lengkap == */
 /* ==================================================== */
 
 body.dark-mode { background-color: #000000; }
@@ -156,8 +190,8 @@ body.dark-mode { background-color: #000000; }
 
 /* Dark Mode untuk Info Box (Casbon) */
 body.dark-mode .info-box {
-    background-color: #3b3a0f; /* Warna latar belakang gelap untuk peringatan */
-    color: #f7f7a8; /* Warna teks terang */
+    background-color: #3b3a0f; 
+    color: #f7f7a8; 
     border-color: #4f4e1f;
 }
 
@@ -165,11 +199,28 @@ body.dark-mode .info-box i {
     color: #ffeb3b;
 }
 
-/* Dark Mode untuk Select Koin (Casbon) */
-body.dark-mode #jumlahCoin {
-    background-color: #333;
-    color: #ddd;
+/* --- DARK MODE: TOMBOL KOIN CASBON BARU --- */
+body.dark-mode .coin-button {
+    border-color: #444; 
+    color: #a0a0a0; 
+    background-color: #2c2c2c;
+    box-shadow: none;
+}
+body.dark-mode .coin-button.active {
+    background-color: #00a896; 
+    color: white; 
+    border-color: #00a896;
+    box-shadow: 0 3px 6px rgba(0, 168, 150, 0.3);
+}
+body.dark-mode .coin-button:hover:not(.active) {
+    background-color: #383838;
     border-color: #555;
-    /* Ganti warna panah di dark mode */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%23ddd" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+}
+body.dark-mode .selection-display {
+    color: #a0a0a0;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+}
+body.dark-mode .selection-display span {
+    color: #00a896;
 }

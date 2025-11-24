@@ -20,7 +20,7 @@
             </div>
             
             <div class="header-logo">
-                <img src="Gambar1.png" alt="Logo Perusahaan"> 
+                <img src="Gambar.png" alt="Logo Perusahaan"> 
             </div>
 
             <div class="theme-toggle" id="themeToggle">
@@ -31,7 +31,7 @@
         <nav class="sidebar" id="sidebarMenu">
             <a href="#" class="close-btn" id="closeSidebar"><i class="fas fa-times"></i></a>
             
-            <a href="#home" id="homeLink"><i class="fas fa-home"></i> HOME / DATA GAJI / DAFTAR</a> 
+            <a href="#home" id="homeLink"><i class="fas fa-home"></i> DAFTAR GAJI</a> 
             
             <a href="#casbon" id="casbonLink"><i class="fas fa-coins"></i> CASBON</a>
             
@@ -84,9 +84,10 @@
                             <option value="danamon">Bank Danamon</option>
                             <option value="maybank">Maybank Indonesia</option>
                             <option value="panin">Bank Panin</option>
-                            <option value="artha_graha">Bank Artha Graha</option>
+                            <option value="seabank">SeaBank</option>
                             <option value="mega">Bank Mega</option>
-                            <option value="bukopin">Bank Bukopin</option>
+                            <option value="tmrw_uob">Bank Tmrw UOB</option>
+                            <option value="aladin">Bank Aladin Syariah</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -105,8 +106,6 @@
                             <option value="dana">DANA</option>
                             <option value="shopeepay">ShopeePay</option>
                             <option value="linkaja">LinkAja</option>
-                            <option value="isaku">i.saku (Indomaret)</option>
-                            <option value="sakuku">Sakuku (BCA)</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -126,33 +125,132 @@
                 <i class="fas fa-coins title-icon"></i>
                 <h3>PENGAJUAN CASBON</h3>
             </div>
-            <p class="subtitle">🎉 **Tarik Koin Anda!** Isi data dengan lengkap dan teliti. Penarikan akan diproses maksimal 1x24 jam.</p>
+            <p class="subtitle">🎉 <h4>Tidak ada coin Casbon Aja!</h4> Isi data dengan lengkap dan teliti. Casbon Kamu Akan Diproses Maksimal 1x24 Jam.</p>
             <hr>
 
             <form id="casbonForm"> 
                 
-                <h4>Informasi Akun</h4>
+                <h2>INFO AKUN FAYA CASBON</h2>
                 <div class="form-group"><label for="casbonNamaFaya">Nama Faya</label><input type="text" id="casbonNamaFaya" name="casbon_nama_faya" placeholder="Masukkan Nama Lengkap Faya (Contoh: Budi Sudarsono)"></div>
                 <div class="form-group"><label for="casbonIdFaya">ID Faya</label><input type="text" id="casbonIdFaya" name="casbon_id_faya" placeholder="Masukkan Id Faya Anda (Contoh: faya0123)"></div>
                 
                 <hr>
 
-                <h4>Detail Penarikan</h4>
+                <h2>Detail Casbon Coin</h2>
                 <div class="form-group">
-                    <label for="jumlahCoin">Jumlah Koin Casbon</label>
-                    <select id="jumlahCoin" name="jumlah_coin">
-                        <option value="">-- Pilih Jumlah Koin --</option>
-                        <option value="50000">50.000 Coin</option>
-                        <option value="100000">100.000 Coin</option>
-                        <option value="150000">150.000 Coin</option>
-                        <option value="200000">200.000 Coin</option>
-                        <option value="250000">250.000 Coin</option>
-                        <option value="300000">300.000 Coin</option>
-                        <option value="400000">400.000 Coin</option>
-                        <option value="500000">500.000 Coin (Maksimal Mingguan)</option>
-                        <option value="750000">750.000 Coin</option>
-                        <option value="1000000">1.000.000 Coin</option>
-                    </select>
+                    <label><h3>Pilih Jumlah Koin (Casbon) Kamu : </h3></label>
+                    
+<div class="coin-option-group" id="coinOptionGroup">
+    
+    <div class="coin-button" data-coin="6100" data-rupiah="5000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">6.100 Koin</span>
+            <span class="rupiah-value">Rp 5.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="12350" data-rupiah="10000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">12.350 Koin</span>
+            <span class="rupiah-value">Rp 10.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="18500" data-rupiah="15000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">18.500 Koin</span>
+            <span class="rupiah-value">Rp 15.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="24700" data-rupiah="20000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">24.700 Koin</span>
+            <span class="rupiah-value">Rp 20.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="30800" data-rupiah="25000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">30.800 Koin</span>
+            <span class="rupiah-value">Rp 25.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="37050" data-rupiah="30000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">37.050 Koin</span>
+            <span class="rupiah-value">Rp 30.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="49400" data-rupiah="40000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">49.400 Koin</span>
+            <span class="rupiah-value">Rp 40.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="61750" data-rupiah="50000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">61.750 Koin</span>
+            <span class="rupiah-value">Rp 50.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="74100" data-rupiah="60000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">74.100 Koin</span>
+            <span class="rupiah-value">Rp 60.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="86450" data-rupiah="70000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">86.450 Koin</span>
+            <span class="rupiah-value">Rp 70.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="98800" data-rupiah="80000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">98.800 Koin</span>
+            <span class="rupiah-value">Rp 80.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="111150" data-rupiah="90000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">111.150 Koin</span>
+            <span class="rupiah-value">Rp 90.000</span>
+        </div>
+    </div>
+    
+    <div class="coin-button" data-coin="123500" data-rupiah="100000">
+        <span class="coin-icon"><i class="fas fa-coins"></i></span>
+        <div class="coin-content">
+            <span class="coin-value">123.500 Koin</span>
+            <span class="rupiah-value">Rp 100.000</span>
+        </div>
+    </div>
+    
+    <input type="hidden" id="jumlahCoinInput" name="jumlah_coin" value="">
+    <input type="hidden" id="jumlahRupiahInput" name="jumlah_rupiah" value="">
+</div>
+                    
+                    <p class="selection-display">CASBON COIN KAMU :  <span id="selectedCoinDisplay">( TOTAL COIN CASBON )</span></p>
                 </div>
                 
                 <div class="form-group info-box">
